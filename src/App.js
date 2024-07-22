@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import TodoList from "./TodoList";
+import TaskDetail from "./TaskDetail";
+import "./App.css";
+const App = () => {
+  const [tasks, setTasks] = useState([]); // State to store the list of tasks
 
-function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route
+            path="/"
+            element={<TodoList tasks={tasks} setTasks={setTasks} />}
+          />{" "}
+          {/* Route for the task list page */}
+          <Route
+            path="/task/:id"
+            element={<TaskDetail tasks={tasks} setTasks={setTasks} />}
+          />{" "}
+          {/* Route for the task detail page */}
+        </Routes>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
